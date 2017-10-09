@@ -1,5 +1,6 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.app.Activity;
 import android.databinding.BaseObservable;
 
 import java.text.DateFormat;
@@ -13,8 +14,10 @@ import java.util.Locale;
 
 public class JourneyViewModel extends BaseObservable {
     private Journey journey;
-    JourneyViewModel(Journey journey) {
+    private Activity activity;
+    JourneyViewModel(Journey journey, Activity activity) {
         this.journey = journey;
+        this.activity = activity;
     }
     public String getName() {
         return journey.getName();
@@ -32,6 +35,10 @@ public class JourneyViewModel extends BaseObservable {
         return sdf.format(cal.getTime());
     }
     public void onJourneyClick() {
-        System.out.println("OnClick "+getName());
+
+        if (activity.getActionBar() == null ){
+            System.out.println("Pas d'action bar, OnClick "+getName());
+        }
+        activity.setTitle(getName());
     }
 }

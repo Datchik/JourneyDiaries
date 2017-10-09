@@ -1,8 +1,10 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +25,7 @@ import java.util.List;
 
 public class JourneysFragment extends Fragment{
 
-
+    private  Activity activity;
 
     @Nullable
     @Override
@@ -34,8 +36,14 @@ public class JourneysFragment extends Fragment{
         journeys.add(new Journey("Genève", Calendar.getInstance(), Calendar.getInstance()));
         journeys.add(new Journey("Colombo", Calendar.getInstance(), Calendar.getInstance()));
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.journeys_fragment,container,false);
-        binding.journeysList.setAdapter(new JourneyListAdapter(journeys));
+        binding.journeysList.setAdapter(new JourneyListAdapter(journeys, activity));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         return binding.getRoot();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (Activity) context;
     }
 }

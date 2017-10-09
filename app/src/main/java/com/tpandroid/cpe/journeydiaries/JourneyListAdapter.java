@@ -1,5 +1,6 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,8 +22,10 @@ import java.util.Locale;
 class JourneyListAdapter extends RecyclerView.Adapter<JourneyListAdapter.BindingHolder>
 {
     private List<Journey> journeys;
-    JourneyListAdapter(List<Journey> journeys) {
+    private Activity activity;
+    JourneyListAdapter(List<Journey> journeys, Activity activity) {
         this.journeys = journeys;
+        this.activity = activity;
     }
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,7 +39,7 @@ class JourneyListAdapter extends RecyclerView.Adapter<JourneyListAdapter.Binding
             position) {
         JourneyItemBinding binding = holder.binding;
         Journey journey = journeys.get(position);
-        binding.setJvm(new JourneyViewModel(journeys.get(position)));
+        binding.setJvm(new JourneyViewModel(journeys.get(position), this.activity));
         //binding.name.setText(journey.getName());
         //Calendar cal = journey.getFrom();
         //DateFormat sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault());
