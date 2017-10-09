@@ -15,13 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
-        //onCreateView();
-        //R.layout.main_activity.
-        //mNavigationDrawerFragment = (JourneysFragmentBinding) getSupportFragmentManager().findFragmentById(R.id.journeys_list);
         showStartup();
-//        binding.fragment_container
-
-
     }
 
     public void showStartup() {
