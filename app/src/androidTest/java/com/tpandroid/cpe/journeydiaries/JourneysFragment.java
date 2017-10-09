@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.tpandroid.cpe.journeydiaries.databinding.JourneysFragmentBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -22,18 +23,16 @@ import java.util.List;
 
 public class JourneysFragment extends Fragment{
 
-    public void showStartup() {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        JourneysFragment fragment = new JourneysFragment();
-        transaction.replace(R.id.fragment_container,fragment);
-        transaction.commit();
-    }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         List<Journey> journeys = new ArrayList<>();
+        journeys.add(new Journey("1", Calendar.getInstance(), Calendar.getInstance()));
+        journeys.add(new Journey("2", Calendar.getInstance(), Calendar.getInstance()));
+        journeys.add(new Journey("3", Calendar.getInstance(), Calendar.getInstance()));
+        journeys.add(new Journey("4", Calendar.getInstance(), Calendar.getInstance()));
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.journeys_fragment,container,false);
         binding.journeysList.setAdapter(new JourneyListAdapter(journeys));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
