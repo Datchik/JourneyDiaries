@@ -9,13 +9,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Louis-Marie on 09/10/2017.
+ * Created by Camille on 09/10/2017.
  */
 
-public class JourneyViewModel extends BaseObservable {
+public class JourneyDetailsViewModel extends BaseObservable {
     private Journey journey;
     private Activity activity;
-    JourneyViewModel(Journey journey, Activity activity) {
+    JourneyDetailsViewModel(Journey journey, Activity activity) {
         this.journey = journey;
         this.activity = activity;
     }
@@ -35,6 +35,10 @@ public class JourneyViewModel extends BaseObservable {
         return sdf.format(cal.getTime());
     }
     public void onJourneyClick() {
+
+        if (activity.getActionBar() == null ){
+            System.out.println("Pas d'action bar, OnClick "+getName());
+        }
         activity.setTitle(getName());
     }
 }
