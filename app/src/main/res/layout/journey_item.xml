@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="5dp"
-        android:onClick="onJourneyClick">
+        android:onClick="@{() -> jvm.onJourneyClick()}">
         <TextView
             android:id="@+id/name"
             android:text="@{jvm.name}"
