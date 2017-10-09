@@ -36,14 +36,13 @@ class JourneyListAdapter extends RecyclerView.Adapter<JourneyListAdapter.Binding
             position) {
         JourneyItemBinding binding = holder.binding;
         Journey journey = journeys.get(position);
-        binding.name.setText(journey.getName());
-        Calendar cal = journey.getFrom();
-        DateFormat sdf =
-                SimpleDateFormat.getDateInstance(SimpleDateFormat.MEDIUM,
-                        Locale.getDefault());
-        binding.startDate.setText(sdf.format(cal.getTime()));
-        cal = journey.getTo();
-        binding.endDate.setText(sdf.format(cal.getTime()));
+        binding.setJvm(new JourneyViewModel(journeys.get(position)));
+        //binding.name.setText(journey.getName());
+        //Calendar cal = journey.getFrom();
+        //DateFormat sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.MEDIUM, Locale.getDefault());
+        //binding.startDate.setText(sdf.format(cal.getTime()));
+        //cal = journey.getTo();
+        //binding.endDate.setText(sdf.format(cal.getTime()));
     }
     @Override
     public int getItemCount() {
