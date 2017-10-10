@@ -28,8 +28,7 @@
                 android:id="@+id/nameJourney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text="JourneyName" />
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,7 +38,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="Departure Date :"
+                android:text="@string/departure_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
@@ -58,7 +57,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="Return Date :"
+                android:text="@string/return_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
@@ -80,16 +79,17 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> jvm.cancelNewJourney()}"
-                android:text="Cancel" />
+                android:onClick="@{() -> jvm.returnToMainActivity()}"
+                android:text="@string/cancel" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> jvm.createNewJourney()}"
-                android:text="Create" />
+                android:text="@string/create_travel" />
 
         </LinearLayout>
+
     </LinearLayout>
 </layout>

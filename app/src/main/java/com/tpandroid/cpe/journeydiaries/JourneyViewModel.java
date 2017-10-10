@@ -1,9 +1,10 @@
 package com.tpandroid.cpe.journeydiaries;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.databinding.BaseObservable;
+
+import com.tpandroid.cpe.journeydiaries.Journey;
+import com.tpandroid.cpe.journeydiaries.MainActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ public class JourneyViewModel extends BaseObservable {
     private Activity activity;
     private MainActivity mainActivity;
 
-    JourneyViewModel(Journey journey, Activity activity, MainActivity mainActivity) {
+    public JourneyViewModel(Journey journey, Activity activity, MainActivity mainActivity) {
         this.journey = journey;
         this.activity = activity;
         this.mainActivity = mainActivity;
@@ -51,6 +52,7 @@ public class JourneyViewModel extends BaseObservable {
 
     public void createNewJourney() {
         activity.setTitle("Vous avez gagné un voyage !!!");
+
     }
 
     public void cancelNewJourney() {
