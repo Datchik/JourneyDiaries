@@ -24,13 +24,14 @@ import java.util.List;
 
 public class NewJourneyFragment extends Fragment{
 
-    private  Activity activity;
+    private Activity activity;
     private MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         NewJourneyFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.new_journey_fragment,container,false);
+        mainActivity = (MainActivity)activity;
         binding.setJvm(new JourneyViewModel(new Journey(), activity, mainActivity));
         return binding.getRoot();
     }
