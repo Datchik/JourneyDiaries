@@ -63,17 +63,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    @SuppressWarnings("deprecation")
-    public void setDate(View view) {
-        showDialog(999);
-        Toast.makeText(getApplicationContext(), "ca",
-                Toast.LENGTH_SHORT)
-                .show();
-    }
-
     @Override
     @SuppressWarnings("deprecation")
     protected Dialog onCreateDialog(int id) {

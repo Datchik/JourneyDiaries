@@ -2,6 +2,8 @@ package com.tpandroid.cpe.journeydiaries;
 
 import android.app.Activity;
 import android.databinding.BaseObservable;
+import android.view.View;
+import android.widget.Toast;
 
 import com.tpandroid.cpe.journeydiaries.Journey;
 import com.tpandroid.cpe.journeydiaries.MainActivity;
@@ -61,4 +63,17 @@ public class JourneyViewModel extends BaseObservable {
         mainActivity.homePage();
     }
 
+    public void setReturnDate() {
+        mainActivity.showDialog(999);
+        Toast.makeText(mainActivity.getApplicationContext(), "ca",
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    public void setDepartureDate() {
+        mainActivity.showDialog(999);
+        Toast.makeText(mainActivity.getApplicationContext(), "ca",
+                Toast.LENGTH_SHORT)
+                .show();
+    }
 }
