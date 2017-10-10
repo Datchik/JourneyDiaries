@@ -1,11 +1,13 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +44,14 @@ public class JourneysFragment extends Fragment{
     }
 
     @Override
+    @TargetApi(11)
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+    }
+
+    @Override
+    @TargetApi(23)
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;

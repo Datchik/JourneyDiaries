@@ -35,6 +35,8 @@ public class JourneyViewModel extends BaseObservable {
         return sdf.format(cal.getTime());
     }
     public void onJourneyClick() {
-        activity.setTitle(getName());
+        if(activity != null) {
+            activity.setTitle(getName());
+        }
     }
 }
