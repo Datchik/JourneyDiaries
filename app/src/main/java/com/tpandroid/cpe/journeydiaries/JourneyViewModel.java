@@ -44,6 +44,7 @@ public class JourneyViewModel extends BaseObservable {
         if(activity != null) {
             activity.setTitle(getName());
         }
+        mainActivity.editJourney(journey);
     }
 
     public void newJourneyClick() {

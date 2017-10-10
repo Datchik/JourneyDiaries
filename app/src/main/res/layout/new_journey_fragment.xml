@@ -26,7 +26,8 @@
                 android:layout_margin="5dp"/>
 
             <EditText
-                android:id="@+id/nameJourney"
+                android:id="@+id/name"
+                android:text="@{jvm.name}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -45,7 +46,8 @@
                 android:layout_margin="5dp"/>
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/start_date"
+                android:text="@{jvm.from}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="date" />
@@ -64,7 +66,8 @@
                 android:layout_margin="5dp"/>
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/end_date"
+                android:text="@{jvm.to}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="date" />

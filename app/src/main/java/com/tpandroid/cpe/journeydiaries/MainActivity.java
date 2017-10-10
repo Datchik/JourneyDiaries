@@ -36,4 +36,14 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void editJourney(Journey journey) {
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        NewJourneyFragment fragment = new NewJourneyFragment();
+        fragment.setJourney(journey);
+        transaction.add(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

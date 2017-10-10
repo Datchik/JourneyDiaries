@@ -27,6 +27,7 @@ public class JourneysFragment extends Fragment{
     private Activity activity;
     private MainActivity mainActivity;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

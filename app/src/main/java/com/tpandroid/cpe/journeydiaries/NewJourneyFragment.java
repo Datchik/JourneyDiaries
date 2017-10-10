@@ -18,15 +18,19 @@ import com.tpandroid.cpe.journeydiaries.databinding.NewJourneyFragmentBinding;
 
 public class NewJourneyFragment extends Fragment{
 
+    private Journey journey;
     private Activity activity;
     private MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        NewJourneyFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.new_journey_fragment,container,false);
+        if(journey==null){
+            journey=new Journey();
+        }
+        NewJourneyFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.new_journey_fragment,container,false);
         mainActivity = (MainActivity)activity;
-        binding.setJvm(new JourneyViewModel(new Journey(), activity, mainActivity));
+        binding.setJvm(new JourneyViewModel(journey, activity, mainActivity));
         return binding.getRoot();
     }
 
@@ -34,5 +38,13 @@ public class NewJourneyFragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
+    }
+
+    public Journey getJourney() {
+        return journey;
+    }
+
+    public void setJourney(Journey journey) {
+        this.journey = journey;
     }
 }
