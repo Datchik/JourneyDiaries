@@ -45,13 +45,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
 
-            <EditText
-                android:id="@+id/start_date"
+            <TextView
                 android:text="@{jvm.from}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="date" />
         </LinearLayout>
+
+        <CalendarView
+            android:id="@+id/calendarView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,8 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
 
-            <EditText
-                android:id="@+id/end_date"
+            <TextView
                 android:text="@{jvm.to}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,9 +93,8 @@
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> jvm.createNewJourney()}"
+                android:onClick="@{() -> jvm.createNewJourney(jvm.name, jvm.from, jvm.to)}"
                 android:text="@string/create_travel" />
-
         </LinearLayout>
 
     </LinearLayout>

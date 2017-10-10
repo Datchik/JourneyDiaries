@@ -51,12 +51,16 @@ public class JourneyViewModel extends BaseObservable {
         mainActivity.newJourney();
     }
 
-    public void createNewJourney() {
-        activity.setTitle("Vous avez gagné un voyage !!!");
-
-    }
-
-    public void cancelNewJourney() {
+    public void createNewJourney(String name, Calendar departure_date, Calendar return_date) {
+        journey.setName(name);
+        journey.setFrom(departure_date);
+        journey.setTo(return_date);
+        activity.setTitle(R.string.app_name);
         mainActivity.homePage();
     }
+
+    public void returnToMainActivity() {
+        mainActivity.homePage();
+    }
+
 }
