@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         NewJourneyFragment fragment = new NewJourneyFragment();
-        transaction.replace(R.id.fragment_container,fragment);
+        transaction.add(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }
