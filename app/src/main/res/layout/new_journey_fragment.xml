@@ -12,12 +12,25 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/nameJourney"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="JourneyName" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="Name :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:id="@+id/nameJourney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="JourneyName" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +39,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="From "
+                android:text="Departure Date :"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
@@ -45,7 +58,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="to "
+                android:text="Return Date :"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
@@ -67,14 +80,15 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> jvm.createNewJourney()}"
-                android:text="Create" />
+                android:onClick="@{() -> jvm.cancelNewJourney()}"
+                android:text="Cancel" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel" />
+                android:onClick="@{() -> jvm.createNewJourney()}"
+                android:text="Create" />
 
         </LinearLayout>
     </LinearLayout>

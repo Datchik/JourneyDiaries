@@ -15,10 +15,10 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
-        showStartup();
+        homePage();
     }
 
-    public void showStartup() {
+    public void homePage() {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         JourneysFragment fragment = new JourneysFragment();

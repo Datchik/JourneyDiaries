@@ -27,7 +27,7 @@ import java.util.List;
 
 public class JourneysFragment extends Fragment{
 
-    private  Activity activity;
+    private Activity activity;
     private MainActivity mainActivity;
 
     @Nullable

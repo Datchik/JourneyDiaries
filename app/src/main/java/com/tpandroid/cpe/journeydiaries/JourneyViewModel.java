@@ -52,4 +52,8 @@ public class JourneyViewModel extends BaseObservable {
     public void createNewJourney() {
         activity.setTitle("Vous avez gagné un voyage !!!");
     }
+
+    public void cancelNewJourney() {
+        mainActivity.homePage();
+    }
 }
