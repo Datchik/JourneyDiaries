@@ -22,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         JourneysFragment fragment = new JourneysFragment();
+        fragment.setMainActivity(this);
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+    }
+
+
+    public void newJourney() {
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        NewJourneyFragment fragment = new NewJourneyFragment();
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
     }

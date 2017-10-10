@@ -26,6 +26,7 @@ import java.util.List;
 public class JourneysFragment extends Fragment{
 
     private  Activity activity;
+    private MainActivity mainActivity;
 
     @Nullable
     @Override
@@ -36,7 +37,7 @@ public class JourneysFragment extends Fragment{
         journeys.add(new Journey("Genève", Calendar.getInstance(), Calendar.getInstance()));
         journeys.add(new Journey("Colombo", Calendar.getInstance(), Calendar.getInstance()));
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.journeys_fragment,container,false);
-        binding.journeysList.setAdapter(new JourneyListAdapter(journeys, activity));
+        binding.journeysList.setAdapter(new JourneyListAdapter(journeys, activity, mainActivity));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         return binding.getRoot();
     }
@@ -45,5 +46,9 @@ public class JourneysFragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
+    }
+
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 }

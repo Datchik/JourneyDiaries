@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data/>
+    <data>
+        <variable
+            name="jvm"
+            type="com.tpandroid.cpe.journeydiaries.JourneyViewModel"
+            />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,7 +14,7 @@
 
         <EditText
             android:id="@+id/nameJourney"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:text="JourneyName" />
@@ -24,8 +29,7 @@
                 android:text="From "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                />
+                android:layout_margin="5dp"/>
 
             <EditText
                 android:id="@+id/editText2"
@@ -44,12 +48,11 @@
                 android:text="to "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                />
+                android:layout_margin="5dp"/>
 
             <EditText
                 android:id="@+id/editText3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="date" />
         </LinearLayout>
@@ -64,6 +67,7 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> jvm.createNewJourney()}"
                 android:text="Create" />
 
             <Button
@@ -73,6 +77,5 @@
                 android:text="Cancel" />
 
         </LinearLayout>
-
     </LinearLayout>
 </layout>
