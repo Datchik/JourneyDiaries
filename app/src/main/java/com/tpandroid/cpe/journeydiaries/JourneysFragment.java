@@ -41,6 +41,7 @@ public class JourneysFragment extends Fragment{
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.journeys_fragment,container,false);
         binding.journeysList.setAdapter(new JourneyListAdapter(journeys, activity, mainActivity));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+        binding.setJvm(new JourneyViewModel(new Journey(), activity, mainActivity));
         return binding.getRoot();
     }
 
