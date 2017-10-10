@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="Name :"
+                android:text="@string/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
@@ -73,7 +73,8 @@
                 android:text="@{jvm.to}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date" />
+                android:inputType="date"
+                android:onClick="setDate"/>
         </LinearLayout>
 
         <Button
