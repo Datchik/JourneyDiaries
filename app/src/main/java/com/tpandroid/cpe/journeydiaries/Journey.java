@@ -1,5 +1,7 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import com.google.android.gms.location.places.Place;
+
 import java.util.Calendar;
 
 /**
@@ -11,10 +13,12 @@ public class Journey {
     private String name;
     private String from;
     private String to;
+    private Place place;
+
     public Journey() {
         name ="";
-        from = "01/01/70";
-        to = "01/01/70";
+        from = "01/01/17";
+        to = "01/01/17";
     }
     public Journey(Integer id, String name, String from, String to) {
         this.name = name;
@@ -45,4 +49,6 @@ public class Journey {
     public void setId(Integer id) {
         this.id = id;
     }
+    public Place getPlace() { return place;  }
+    public void setPlace(Place place) { this.place = place; }
 }

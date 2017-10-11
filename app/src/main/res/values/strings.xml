@@ -6,4 +6,5 @@
     <string name="create_travel">Create Travel</string>
     <string name="update_travel">Update</string>
     <string name="name">Name :</string>
+    <string name="title_activity_maps">title_activity_maps</string>
 </resources>

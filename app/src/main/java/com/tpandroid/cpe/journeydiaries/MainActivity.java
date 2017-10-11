@@ -1,10 +1,17 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.tpandroid.cpe.journeydiaries.databinding.MainActivityBinding;
@@ -70,7 +77,16 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-
+    public void setPlaceJourney(Journey journey) {
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        MapFragment fragment = new MapFragment();
+        fragment.setJourney(journey);
+        fragment.setMainActivity(this);
+        transaction.add(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
 
 
@@ -107,7 +123,23 @@ public class MainActivity extends AppCompatActivity {
         df.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
     public void showToDate(int year, int month, int day) {
+
         TextView df = (TextView)findViewById(R.id.to);
         df.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
+
+/*
+    @TargetApi(23)
+    private boolean canAccessLocation() {
+        return(PackageManager.PERMISSION_GRANTED==checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+    }*/
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull final String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //do some work
+    }
+
+
 }
