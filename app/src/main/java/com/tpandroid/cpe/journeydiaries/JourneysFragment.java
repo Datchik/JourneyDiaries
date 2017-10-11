@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tpandroid.cpe.journeydiaries.database.DatabaseAccess;
+import com.tpandroid.cpe.journeydiaries.database.DatabaseInstance;
 import com.tpandroid.cpe.journeydiaries.databinding.JourneysFragmentBinding;
 
 import java.util.ArrayList;
@@ -31,12 +33,9 @@ public class JourneysFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        List<Journey> journeys = new ArrayList<>();
-        journeys.add(new Journey("City trip to Paris", Calendar.getInstance(), Calendar.getInstance()));
-        journeys.add(new Journey("Chicago", Calendar.getInstance(), Calendar.getInstance()));
-        journeys.add(new Journey("Genève", Calendar.getInstance(), Calendar.getInstance()));
-        journeys.add(new Journey("Colombo", Calendar.getInstance(), Calendar.getInstance()));
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.journeys_fragment,container,false);
+        List<Journey> journeys = DatabaseInstance.getInstance(binding.getRoot().getContext()).getAllJourneys();
+
         binding.journeysList.setAdapter(new JourneyListAdapter(journeys, activity, mainActivity));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         binding.setJvm(new JourneyViewModel(new Journey(), activity, mainActivity));

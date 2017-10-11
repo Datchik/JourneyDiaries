@@ -7,6 +7,7 @@ import java.util.Calendar;
  */
 
 public class Journey {
+    private Integer id;
     private String name;
     private Calendar from;
     private Calendar to;
@@ -15,7 +16,7 @@ public class Journey {
         from = Calendar.getInstance();
         to = Calendar.getInstance();
     }
-    public Journey(String name, Calendar from, Calendar to) {
+    public Journey(Integer id, String name, Calendar from, Calendar to) {
         this.name = name;
         this.from = from;
         this.to = to;
@@ -37,5 +38,11 @@ public class Journey {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

@@ -2,10 +2,15 @@ package com.tpandroid.cpe.journeydiaries.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.tpandroid.cpe.journeydiaries.Journey;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.SimpleTimeZone;
 
@@ -35,15 +40,31 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db.execSQL("Create table Journey(id integer primary key, name String, departureDate String, returnDate String);");
         ContentValues content = new ContentValues();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        content.put("name", "");
+
+        content.put("name", "Default");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
         db.insert("Journey", null, content);
+
         content.put("name", "City trip in Paris");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
         db.insert("Journey", null, content);
 
+        content.put("name", "Chicago");
+        content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        db.insert("Journey", null, content);
+
+        content.put("name", "Genève");
+        content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        db.insert("Journey", null, content);
+
+        content.put("name", "Colombo");
+        content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        db.insert("Journey", null, content);
     }
 
     @Override
@@ -51,7 +72,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     }
 
-    public void createJourney(String name, String departureDate, String returnDate) {
+    void createJourney(String name, String departureDate, String returnDate) {
 
         ContentValues content = new ContentValues();
         content.put("name", name);
@@ -70,7 +91,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteJourney(Integer id) {
+    void deleteJourney(Integer id) {
         String where = "id = " + String.valueOf(id);
         db.beginTransaction();
         try{
@@ -85,7 +106,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         }
     }
 
-    public void updateJourney(Integer id, String name, String departureDate, String returnDate) {
+    void updateJourney(Integer id, String name, String departureDate, String returnDate) {
         ContentValues content = new ContentValues();
         content.put("name", name);
         content.put("departureDate", departureDate);
@@ -102,5 +123,40 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         finally{
             db.endTransaction();
         }
+    }
+
+    Journey getJourney(String name, String departureDate, String returnDate){
+        String[] columns = new String[]{"id", "name", "departureDate", "returnDate"};
+        String whereClause = "id = ? and name = ?";
+        long id=0;
+        String[] whereArgs = {String.valueOf(id)};
+        //Cursor cursor = db.query(
+              //  "Journey", null, whereClause, whereArgs, groupBy, having, orderBy);
+        Journey j = new Journey();
+        return j;
+    }
+
+    public ArrayList<Journey> getAllJourneys(){
+        ArrayList<Journey> journeys = new ArrayList<>();
+        Cursor cursor = db.query(
+                "Journey", null, null, null, null, null, null);
+        if (cursor.moveToFirst()){
+            do{
+                Journey j = new Journey();
+                j.setName(cursor.getString(cursor.getColumnIndex("name")));
+                j.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                Calendar calendar = Calendar.getInstance();
+                journeys.add(j);
+                try {
+                    calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(cursor.getString(cursor.getColumnIndex("departureDate"))));
+                    j.setFrom(calendar);
+                    calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(cursor.getString(cursor.getColumnIndex("returnDate"))));
+                    j.setTo(calendar);
+                }catch(Exception e){
+                    System.out.println("Exception parse calendar");
+                }
+            }while(cursor.moveToNext());
+        }
+        return journeys;
     }
 }

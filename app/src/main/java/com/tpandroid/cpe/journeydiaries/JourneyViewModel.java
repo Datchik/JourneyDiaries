@@ -61,7 +61,7 @@ public class JourneyViewModel extends BaseObservable {
             calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(departure_date));
             journey.setFrom(calendar);
             calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(departure_date));
-           journey.setTo(calendar);
+            journey.setTo(calendar);
             activity.setTitle("Salut Jordan !");
         }catch(Exception e){
             System.out.println("Exception parse caednar");

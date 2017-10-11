@@ -1,6 +1,11 @@
 package com.tpandroid.cpe.journeydiaries.database;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.tpandroid.cpe.journeydiaries.Journey;
+
+import java.util.ArrayList;
 
 /**
  * Created by Camille on 10/10/2017.
@@ -8,21 +13,34 @@ import android.content.Context;
 
 public class DatabaseInstance {
 
-    private DatabaseAccess database;
+    private static DatabaseInstance  database = null;
+    private DatabaseAccess dbAccess;
 
-    private DatabaseInstance(Context context) {
-        database = DatabaseAccess.getInstance(context);
+    public static DatabaseInstance  getInstance(Context context){
+        if (database == null){
+            database = new DatabaseInstance(context);
+        }
+        return database;
     }
 
-    private void createJourney(String name, String departureDate, String returnDate){
-        database.createJourney(name, departureDate, returnDate);
+    public DatabaseInstance(Context context) {
+        dbAccess = DatabaseAccess.getInstance(context);
     }
 
-    private void updateJourney(Integer id, String name, String departureDate, String returnDate){
-        database.updateJourney(id, name, departureDate, returnDate);
+    public void createJourney(String name, String departureDate, String returnDate){
+        dbAccess.createJourney(name, departureDate, returnDate);
     }
 
-    private void deleteJourney(Integer id){
-        database.deleteJourney(id);
+    public void updateJourney(Integer id, String name, String departureDate, String returnDate){
+        dbAccess.updateJourney(id, name, departureDate, returnDate);
     }
+
+    public void deleteJourney(Integer id){
+        dbAccess.deleteJourney(id);
+    }
+
+    public ArrayList<Journey> getAllJourneys(){
+        return dbAccess.getAllJourneys();
+    }
+
 }
