@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.tpandroid.cpe.journeydiaries.Journey;
 import com.tpandroid.cpe.journeydiaries.MainActivity;
+import com.tpandroid.cpe.journeydiaries.database.DatabaseInstance;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -55,17 +56,8 @@ public class JourneyViewModel extends BaseObservable {
     }
 
     public void createNewJourney(String name, String departure_date, String return_date) {
-        journey.setName(name);
-        Calendar calendar = Calendar.getInstance();
-        try {
-            calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(departure_date));
-            journey.setFrom(calendar);
-            calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(departure_date));
-            journey.setTo(calendar);
-            activity.setTitle("Salut Jordan !");
-        }catch(Exception e){
-            System.out.println("Exception parse caednar");
-        }
+        activity.setTitle(R.string.app_name);
+        DatabaseInstance.getInstance(mainActivity).createJourney(name, departure_date, return_date);
         mainActivity.homePage();
     }
 
@@ -75,16 +67,10 @@ public class JourneyViewModel extends BaseObservable {
 
     public void setReturnDate() {
         mainActivity.showDialog(999);
-        Toast.makeText(mainActivity.getApplicationContext(), "ca",
-                Toast.LENGTH_SHORT)
-                .show();
 
     }
 
     public void setDepartureDate() {
         mainActivity.showDialog(998);
-        Toast.makeText(mainActivity.getApplicationContext(), "ca",
-                Toast.LENGTH_SHORT)
-                .show();
     }
 }
