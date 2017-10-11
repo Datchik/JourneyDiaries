@@ -9,28 +9,28 @@ import java.util.Calendar;
 public class Journey {
     private Integer id;
     private String name;
-    private Calendar from;
-    private Calendar to;
+    private String from;
+    private String to;
     public Journey() {
         name ="";
-        from = Calendar.getInstance();
-        to = Calendar.getInstance();
+        from = "01/01/70";
+        to = "01/01/70";
     }
-    public Journey(Integer id, String name, Calendar from, Calendar to) {
+    public Journey(Integer id, String name, String from, String to) {
         this.name = name;
         this.from = from;
         this.to = to;
     }
-    public Calendar getFrom() {
+    public String getFrom() {
         return from;
     }
-    public void setFrom(Calendar from) {
+    public void setFrom(String from) {
         this.from = from;
     }
-    public Calendar getTo() {
+    public String getTo() {
         return to;
     }
-    public void setTo(Calendar to) {
+    public void setTo(String to) {
         this.to = to;
     }
     public String getName() {

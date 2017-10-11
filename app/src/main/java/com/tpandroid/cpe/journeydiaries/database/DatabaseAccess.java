@@ -145,16 +145,9 @@ public class DatabaseAccess extends SQLiteOpenHelper {
                 Journey j = new Journey();
                 j.setName(cursor.getString(cursor.getColumnIndex("name")));
                 j.setId(cursor.getInt(cursor.getColumnIndex("id")));
-                Calendar calendar = Calendar.getInstance();
                 journeys.add(j);
-                try {
-                    calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(cursor.getString(cursor.getColumnIndex("departureDate"))));
-                    j.setFrom(calendar);
-                    calendar.setTime(new SimpleDateFormat("dd/MM/yy").parse(cursor.getString(cursor.getColumnIndex("returnDate"))));
-                    j.setTo(calendar);
-                }catch(Exception e){
-                    System.out.println("Exception parse calendar");
-                }
+                j.setFrom(cursor.getString(cursor.getColumnIndex("departureDate")));
+                j.setTo(cursor.getString(cursor.getColumnIndex("returnDate")));
             }while(cursor.moveToNext());
         }
         return journeys;

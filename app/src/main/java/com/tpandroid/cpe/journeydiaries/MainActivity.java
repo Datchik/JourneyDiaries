@@ -74,12 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @SuppressWarnings("deprecation")
-    public void setDate(View view) {
-        showDialog(999);
-        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     @SuppressWarnings("deprecation")
     protected Dialog onCreateDialog(int id) {
@@ -113,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         df.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
     public void showToDate(int year, int month, int day) {
-
         TextView df = (TextView)findViewById(R.id.to);
         df.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
