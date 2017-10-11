@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DatePicker datePicker;
     private Calendar calendar;
-    private TextView dateView;
+    private TextView dateViewFrom;
+    private TextView dateViewTo;
     private int year, month, day;
 
     private MainActivityBinding binding;
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
         homePage();
+        dateViewFrom = (TextView) findViewById(R.id.from);
+        dateViewTo = (TextView) findViewById(R.id.to);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+       // showDate(year, month+1, day);
     }
 
     public void homePage() {
@@ -63,27 +71,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     @SuppressWarnings("deprecation")
     protected Dialog onCreateDialog(int id) {
         if (id == 999) {
             return new DatePickerDialog(this,
-                    myDateListener, year, month, day);
+                    myDateToListener, year, month, day);
+        }
+        if (id == 998) {
+            return new DatePickerDialog(this,
+                    myDateFromListener, year, month, day);
         }
         return null;
     }
 
-    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener myDateFromListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-                    // arg1 = year
-                    // arg2 = month
-                    // arg3 = day
-           showDate(arg1, arg2+1, arg3);
+           showFromDate(arg1, arg2+1, arg3);
         }
     };
 
-    private void showDate(int year, int month, int day) {
-        dateView.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
+    private DatePickerDialog.OnDateSetListener myDateToListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            showToDate(arg1, arg2+1, arg3);
+        }
+    };
+
+    public void showFromDate(int year, int month, int day) {
+        TextView df = (TextView)findViewById(R.id.from);
+        df.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
+    }
+    public void showToDate(int year, int month, int day) {
+
+        TextView df = (TextView)findViewById(R.id.to);
+        df.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
 }
