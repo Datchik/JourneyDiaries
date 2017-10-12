@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         MyMapFragment fragment = new MyMapFragment();
-        //fragment.setMainActivity(this);
+        fragment.setMainActivity(this);
         fragment.setJourney(journey);
         transaction.add(R.id.fragment_container,fragment);
         transaction.addToBackStack(null);
