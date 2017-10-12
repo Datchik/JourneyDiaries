@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     public String getPickedPlaceId() {
         return pickedPlaceId;
     }
-    public String setPickedPlaceId() {
-        return pickedPlaceId;
+    public void setPickedPlaceId(String pickedPlaceId) {
+        this.pickedPlaceId = pickedPlaceId;
     }
 }

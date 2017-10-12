@@ -42,7 +42,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 
     private Journey journey;
     private Activity activity;
-    private Activity mainActivity;
+    private MainActivity mainActivity;
     private Place myPlace;
 
     private static final int PLACE_PICKER_REQUEST = 1;
@@ -69,7 +69,8 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         //builder.setLatLngBounds(bounds);
-        if(journey.getId()!=null) {
+        System.out.println("FINDME "+journey.getPlaceId());
+        if(getPlace(journey.getPlaceId())!=null) {
             LatLng placeLatLng = getPlace(journey.getPlaceId()).getLatLng();
             LatLng north = new LatLng(placeLatLng.latitude, placeLatLng.longitude + 0.1);
             LatLng south = new LatLng(placeLatLng.latitude, placeLatLng.longitude - 0.1);
@@ -107,7 +108,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 
             LatLngBounds bounds = PlacePicker.getLatLngBounds(data);
             journey.setPlaceId(place.getId());
-            mainActivity.setPickedPlaceID(place.getId());
+            mainActivity.setPickedPlaceId(place.getId());
             // Update UI with bounds
 
         }
@@ -151,7 +152,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
-    public void setMainActivity(Activity mainActivity) {
+    public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
