@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.internal.PlaceEntity;
 import com.tpandroid.cpe.journeydiaries.Journey;
 
 import java.text.ParseException;
@@ -37,33 +39,38 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table Journey(id integer primary key, name String, departureDate String, returnDate String);");
+        db.execSQL("Create table Journey(id integer primary key, name String, departureDate String, returnDate String, placeId String, );");
         ContentValues content = new ContentValues();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 
         content.put("name", "Default");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("placeId", "ChIJl4foalHq9EcR8CG75CqrCAQ");
         db.insert("Journey", null, content);
 
         content.put("name", "City trip in Paris");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("placeId", "ChIJD7fiBh9u5kcRYJSMaMOCCwQ");
         db.insert("Journey", null, content);
 
         content.put("name", "Chicago");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("placeId", "ChIJ7cv00DwsDogRAMDACa2m4K8");
         db.insert("Journey", null, content);
 
         content.put("name", "Genève");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("placeId", "ChIJ6-LQkwZljEcRObwLezWVtqA");
         db.insert("Journey", null, content);
 
         content.put("name", "Colombo");
         content.put("departureDate", sdf.format(Calendar.getInstance().getTime()));
         content.put("returnDate", sdf.format(Calendar.getInstance().getTime()));
+        content.put("placeId", "ChIJA3B6D9FT4joRjYPTMk0uCzI");
         db.insert("Journey", null, content);
     }
 
@@ -72,12 +79,13 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     }
 
-    void createJourney(String name, String departureDate, String returnDate) {
+    void createJourney(String name, String departureDate, String returnDate, String placeId) {
 
         ContentValues content = new ContentValues();
         content.put("name", name);
         content.put("departureDate", departureDate);
         content.put("returnDate", returnDate);
+        content.put("placeId", placeId);
         db.beginTransaction();
         try{
             db.insert("Journey", null, content);
@@ -106,11 +114,12 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         }
     }
 
-    void updateJourney(Integer id, String name, String departureDate, String returnDate) {
+    void updateJourney(Integer id, String name, String departureDate, String returnDate, String placeId) {
         ContentValues content = new ContentValues();
         content.put("name", name);
         content.put("departureDate", departureDate);
         content.put("returnDate", returnDate);
+        content.put("placeId", placeId);
         String where = "id = " + String.valueOf(id);
         db.beginTransaction();
         try{
@@ -125,16 +134,16 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         }
     }
 
-    Journey getJourney(String name, String departureDate, String returnDate){
-        String[] columns = new String[]{"id", "name", "departureDate", "returnDate"};
-        String whereClause = "id = ? and name = ?";
-        long id=0;
-        String[] whereArgs = {String.valueOf(id)};
-        //Cursor cursor = db.query(
-              //  "Journey", null, whereClause, whereArgs, groupBy, having, orderBy);
-        Journey j = new Journey();
-        return j;
-    }
+//    Journey getJourney(String name, String departureDate, String returnDate){
+//        String[] columns = new String[]{"id", "name", "departureDate", "returnDate"};
+//        String whereClause = "id = ? and name = ?";
+//        long id=0;
+//        String[] whereArgs = {String.valueOf(id)};
+//        //Cursor cursor = db.query(
+//              //  "Journey", null, whereClause, whereArgs, groupBy, having, orderBy);
+//        Journey j = new Journey();
+//        return j;
+//    }
 
     public ArrayList<Journey> getAllJourneys(){
         ArrayList<Journey> journeys = new ArrayList<>();
@@ -145,9 +154,10 @@ public class DatabaseAccess extends SQLiteOpenHelper {
                 Journey j = new Journey();
                 j.setName(cursor.getString(cursor.getColumnIndex("name")));
                 j.setId(cursor.getInt(cursor.getColumnIndex("id")));
-                journeys.add(j);
                 j.setFrom(cursor.getString(cursor.getColumnIndex("departureDate")));
                 j.setTo(cursor.getString(cursor.getColumnIndex("returnDate")));
+                j.setPlaceId(cursor.getString(cursor.getColumnIndex("placeId")));
+                journeys.add(j);
             }while(cursor.moveToNext());
         }
         return journeys;

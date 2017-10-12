@@ -3,8 +3,10 @@
     <string name="departure_date">Departure Date :</string>
     <string name="return_date">Return Date :</string>
     <string name="cancel">Cancel</string>
-    <string name="create_travel">Create Travel</string>
+    <string name="create_travel">Create</string>
     <string name="update_travel">Update</string>
     <string name="name">Name :</string>
     <string name="title_activity_maps">title_activity_maps</string>
+    <string name="api_key">AIzaSyBfIepaYqBr_5pQ8ndKMERPjVeAKP9qR3A</string>
+    <string name="view_on_map">View on map</string>
 </resources>
