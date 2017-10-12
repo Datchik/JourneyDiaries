@@ -14,9 +14,10 @@ public class Journey {
     private String placeId;
     private String note;
     public Journey() {
-        name ="";
+        name ="Name";
         from = "01/01/17";
         to = "01/01/17";
+        this.placeId = "ChIJWXKEe5fq9EcRdkoTcx23-54";
     }
     public Journey(Integer id, String name, String from, String to) {
         this.name = name;
