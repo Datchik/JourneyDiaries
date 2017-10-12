@@ -39,7 +39,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table Journey(id integer primary key, name String, departureDate String, returnDate String, placeId String );");
+        db.execSQL("Create table Journey(id integer primary key, name String, departureDate String, returnDate String, placeId String);");
         ContentValues content = new ContentValues();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 

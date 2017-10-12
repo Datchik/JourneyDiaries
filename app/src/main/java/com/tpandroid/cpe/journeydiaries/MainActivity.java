@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         NewJourneyFragment fragment = new NewJourneyFragment();
-        transaction.add(R.id.fragment_container,fragment);
-        transaction.addToBackStack(null);
+        transaction.replace(R.id.fragment_container,fragment);
+        //transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         NewJourneyFragment fragment = new NewJourneyFragment();
         fragment.setJourney(journey);
-        transaction.add(R.id.fragment_container,fragment);
-        transaction.addToBackStack(null);
+        transaction.replace(R.id.fragment_container,fragment);
+        //transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         MyMapFragment fragment = new MyMapFragment();
         fragment.setMainActivity(this);
         fragment.setJourney(journey);
-        transaction.add(R.id.fragment_container,fragment);
-        transaction.addToBackStack(null);
+        transaction.replace(R.id.fragment_container,fragment);
+        //transaction.addToBackStack(null);
         transaction.commit();
     }
 

@@ -39,6 +39,7 @@ public class JourneyViewModel extends BaseObservable {
     private Activity activity;
     private MainActivity mainActivity;
     private String state;
+    private String mapText;
     private Place myPlace;
 
     public JourneyViewModel(Journey journey, Activity activity, MainActivity mainActivity) {
@@ -104,10 +105,10 @@ public class JourneyViewModel extends BaseObservable {
     }
 
     public void createNewJourney(String name, String departure_date, String return_date) {
-        if(state == "Create"){
+        if(state.equals(activity.getString(R.string.create_travel))){
             DatabaseInstance.getInstance(mainActivity).createJourney(name, departure_date, return_date, mainActivity.getPickedPlaceId());
         }
-        else if(state == "Update"){
+        else if(state.equals(activity.getString(R.string.update_travel))){
             DatabaseInstance.getInstance(mainActivity).updateJourney(getId(), name, departure_date, return_date, mainActivity.getPickedPlaceId());
         }
         activity.setTitle(R.string.app_name);

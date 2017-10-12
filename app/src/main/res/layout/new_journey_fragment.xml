@@ -98,7 +98,7 @@
 
             <TextView
                 android:id="@+id/place"
-                android:text="View or select on map"
+                android:text="----------------"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
