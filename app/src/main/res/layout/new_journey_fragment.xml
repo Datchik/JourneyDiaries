@@ -89,6 +89,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
 
+            <Button
+                android:id="@+id/setplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
+
             <TextView
                 android:id="@+id/place"
                 android:text="@{jvm.}"
@@ -96,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"
                 android:onClick="@{() -> jvm.setJourneyPlace()}"/>
+
         </LinearLayout>
 
         <LinearLayout

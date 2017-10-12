@@ -1,17 +1,11 @@
 package com.tpandroid.cpe.journeydiaries;
 
-import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.tpandroid.cpe.journeydiaries.databinding.MainActivityBinding;
@@ -20,10 +14,8 @@ import java.util.Calendar;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
     public void setPlaceJourney(Journey journey) {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        MapFragment fragment = new MapFragment();
+        MyMapFragment fragment = new MyMapFragment();
+        //fragment.setMainActivity(this);
         fragment.setJourney(journey);
-        fragment.setMainActivity(this);
         transaction.add(R.id.fragment_container,fragment);
         transaction.addToBackStack(null);
         transaction.commit();
