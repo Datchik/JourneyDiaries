@@ -27,12 +27,12 @@ public class DatabaseInstance {
         dbAccess = DatabaseAccess.getInstance(context);
     }
 
-    public void createJourney(String name, String departureDate, String returnDate){
-        dbAccess.createJourney(name, departureDate, returnDate);
+    public void createJourney(String name, String departureDate, String returnDate, String placeId){
+        dbAccess.createJourney(name, departureDate, returnDate, placeId);
     }
 
-    public void updateJourney(Integer id, String name, String departureDate, String returnDate){
-        dbAccess.updateJourney(id, name, departureDate, returnDate);
+    public void updateJourney(Integer id, String name, String departureDate, String returnDate, String placeId){
+        dbAccess.updateJourney(id, name, departureDate, returnDate, placeId);
     }
 
     public void deleteJourney(Integer id){

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Calendar calendar;
     private TextView dateViewFrom;
     private TextView dateViewTo;
+    private String pickedPlaceId;
     private int year, month, day;
 
     private MainActivityBinding binding;
@@ -134,4 +135,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public String getPickedPlaceId() {
+        return pickedPlaceId;
+    }
+    public String setPickedPlaceId() {
+        return pickedPlaceId;
+    }
 }

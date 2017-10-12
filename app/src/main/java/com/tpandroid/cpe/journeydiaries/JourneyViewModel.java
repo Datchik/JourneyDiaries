@@ -105,10 +105,10 @@ public class JourneyViewModel extends BaseObservable {
 
     public void createNewJourney(String name, String departure_date, String return_date) {
         if(state == "Create"){
-            DatabaseInstance.getInstance(mainActivity).createJourney(name, departure_date, return_date);
+            DatabaseInstance.getInstance(mainActivity).createJourney(name, departure_date, return_date, mainActivity.getPickedPlaceId());
         }
         else if(state == "Update"){
-            DatabaseInstance.getInstance(mainActivity).updateJourney(getId(), name, departure_date, return_date);
+            DatabaseInstance.getInstance(mainActivity).updateJourney(getId(), name, departure_date, return_date, mainActivity.getPickedPlaceId());
         }
         activity.setTitle(R.string.app_name);
         mainActivity.homePage();
