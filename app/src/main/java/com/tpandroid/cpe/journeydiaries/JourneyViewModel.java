@@ -40,13 +40,14 @@ public class JourneyViewModel extends BaseObservable {
     private MainActivity mainActivity;
     private String state;
     private String mapText;
-    private Place myPlace;
+    private String note;
 
     public JourneyViewModel(Journey journey, Activity activity, MainActivity mainActivity) {
         this.journey = journey;
         this.activity = activity;
         this.mainActivity = mainActivity;
         this.state = journey.getId() == null ? activity.getString(R.string.create_travel) : activity.getString(R.string.update_travel);
+        this.mapText = journey.getId() == null ? activity.getString(R.string.select_on_map) : activity.getString(R.string.view_on_map);
     }
 
     public String getState() {
@@ -67,30 +68,8 @@ public class JourneyViewModel extends BaseObservable {
     public String getNote() {
         return journey.getNote();
     }
-    public Place getPlace(){
-        GoogleApiClient gclient = new GoogleApiClient.Builder(activity).addApi(Places.PLACE_DETECTION_API).addApi(Places.GEO_DATA_API).build();
-        Places.GeoDataApi.getPlaceById( gclient, journey.getPlaceId()).setResultCallback(new ResultCallback<PlaceBuffer>() {
-            @Override
-            public void onResult(@NonNull PlaceBuffer places) {
-                if (places.getStatus().isSuccess() && places.getCount() > 0) {
-                    myPlace = places.get(0);
-                    Log.i(TAG, "Place found: " + myPlace.getName());
-                } else {
-                    Log.e(TAG, "Place not found");
-                }
-                places.release();
-            }
-        });
-        return myPlace;
-    }
-
-    public String getTextButton(){
-        if(journey.getId() == null){
-            return String.valueOf(R.string.create_travel);
-        }
-        else{
-            return String.valueOf(R.string.update_travel);
-        }
+    public String getMapText() {
+        return mapText;
     }
 
     public void onJourneyClick() {
@@ -104,12 +83,12 @@ public class JourneyViewModel extends BaseObservable {
         mainActivity.newJourney();
     }
 
-    public void createNewJourney(String name, String departure_date, String return_date) {
+    public void createNewJourney(String name, String departure_date, String return_date, String note) {
         if(state.equals(activity.getString(R.string.create_travel))){
-            DatabaseInstance.getInstance(mainActivity).createJourney(name, departure_date, return_date, mainActivity.getPickedPlaceId());
+            DatabaseInstance.getInstance(mainActivity).createJourney(name, departure_date, return_date, mainActivity.getPickedPlaceId(), note);
         }
         else if(state.equals(activity.getString(R.string.update_travel))){
-            DatabaseInstance.getInstance(mainActivity).updateJourney(getId(), name, departure_date, return_date, mainActivity.getPickedPlaceId());
+            DatabaseInstance.getInstance(mainActivity).updateJourney(getId(), name, departure_date, return_date, mainActivity.getPickedPlaceId(), note);
         }
         activity.setTitle(R.string.app_name);
         mainActivity.homePage();
@@ -131,4 +110,5 @@ public class JourneyViewModel extends BaseObservable {
     public void setJourneyPlace(){
         mainActivity.setPlaceJourney(journey);
     }
+
 }

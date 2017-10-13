@@ -6,126 +6,123 @@
             type="com.tpandroid.cpe.journeydiaries.JourneyViewModel"
             />
     </data>
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:background="@android:color/white">
 
-            <TextView
-                android:text="@string/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/name"
-                android:text="@{jvm.name}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                    <TextView
+                        android:text="@string/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"/>
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:text="@{jvm.name}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="@string/departure_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"/>
+
+                    <TextView
+                        android:id="@+id/from"
+                        android:text="@{jvm.from}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:textColor="#000"
+                        android:onClick="@{() -> jvm.setDepartureDate()}"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="@string/return_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"/>
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:text="@{jvm.to}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:textColor="#000"
+                        android:onClick="@{() -> jvm.setReturnDate()}"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/place"
+                    android:text="@{jvm.mapText}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:onClick="@{() -> jvm.setJourneyPlace()}"/>
+
+                <TextView
+                    android:text="@string/mes_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:onClick="@{() -> jvm.setJourneyPlace()}"/>
+
+                <EditText
+                    android:id="@+id/notes"
+                    android:text="@{jvm.note}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> jvm.returnToMainActivity()}"
+                        android:text="@string/cancel" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> jvm.createNewJourney(name.getText().toString(), from.getText().toString(), to.getText().toString(), notes.getText().toString())}"
+                        android:text="@{jvm.state}" />
+                </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/departure_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"/>
-
-            <TextView
-                android:id="@+id/from"
-                android:text="@{jvm.from}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:textColor="#000"
-                android:onClick="@{() -> jvm.setDepartureDate()}"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/return_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"/>
-
-            <TextView
-                android:id="@+id/to"
-                android:text="@{jvm.to}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:textColor="#000"
-                android:onClick="@{() -> jvm.setReturnDate()}"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/return_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"/>
-
-            <Button
-                android:id="@+id/setplace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <TextView
-                android:id="@+id/place"
-                android:text="----------------"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:onClick="@{() -> jvm.setJourneyPlace()}"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> jvm.returnToMainActivity()}"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> jvm.createNewJourney(name.getText().toString(), from.getText().toString(), to.getText().toString())}"
-                android:text="@{jvm.state}" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </layout>

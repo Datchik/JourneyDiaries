@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         NewJourneyFragment fragment = new NewJourneyFragment();
         transaction.replace(R.id.fragment_container,fragment);
-        //transaction.addToBackStack(null);
+        transaction.addToBackStack(null);
+        //manager.popBackStack();
         transaction.commit();
     }
 
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         NewJourneyFragment fragment = new NewJourneyFragment();
         fragment.setJourney(journey);
         transaction.replace(R.id.fragment_container,fragment);
-        //transaction.addToBackStack(null);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 

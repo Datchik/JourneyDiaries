@@ -40,10 +40,6 @@ public class NewJourneyFragment extends Fragment{
         activity = (Activity) context;
     }
 
-    public Journey getJourney() {
-        return journey;
-    }
-
     public void setJourney(Journey journey) {
         this.journey = journey;
     }
