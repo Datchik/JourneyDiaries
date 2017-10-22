@@ -47,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
         JourneysFragment fragment = new JourneysFragment();
         fragment.setMainActivity(this);
         transaction.replace(R.id.fragment_container,fragment);
+        //transaction.addToBackStack("home");
         transaction.commit();
     }
 
+    public void goBackLevelHomePage(){
+        FragmentManager manager = getFragmentManager();
+        manager.popBackStack();
+    }
 
     public void newJourney() {
         FragmentManager manager = getFragmentManager();
@@ -57,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         NewJourneyFragment fragment = new NewJourneyFragment();
         transaction.replace(R.id.fragment_container,fragment);
         transaction.addToBackStack(null);
-        //manager.popBackStack();
         transaction.commit();
     }
 
@@ -77,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         MyMapFragment fragment = new MyMapFragment();
         fragment.setMainActivity(this);
         fragment.setJourney(journey);
-        transaction.replace(R.id.fragment_container,fragment);
-        //transaction.addToBackStack(null);
+        transaction.add(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 

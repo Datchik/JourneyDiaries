@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
@@ -44,6 +46,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
     private Activity activity;
     private MainActivity mainActivity;
     private Place myPlace;
+    private GoogleApiClient gclient;
 
     private static final int PLACE_PICKER_REQUEST = 1;
 
@@ -60,6 +63,8 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        gclient = new GoogleApiClient.Builder(mainActivity).addApi(Places.GEO_DATA_API).build();
+
         // on utilise maps -> pas de fragment
         // activity.setContentView(R.layout.mymap_fragment);
 
@@ -67,23 +72,32 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 
 
 
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-        //builder.setLatLngBounds(bounds);
+
         System.out.println("FINDME "+journey.getPlaceId());
-        if(getPlace(journey.getPlaceId())!=null) {
-            LatLng placeLatLng = getPlace(journey.getPlaceId()).getLatLng();
-            LatLng north = new LatLng(placeLatLng.latitude, placeLatLng.longitude + 0.1);
-            LatLng south = new LatLng(placeLatLng.latitude, placeLatLng.longitude - 0.1);
-            builder.setLatLngBounds(new LatLngBounds(north,south));
+
+        LatLngBounds bounds;
+        if(journey.getPlaceId()!=null ) {
+            // On lance la recherche de l'endroit.
+            // La mise à jour sera alors faite depuis le @OnResult du CallBack
+            getPlace(journey.getPlaceId());
         }else{
+            // Appli n'a pas initialisé PlaceID
+            System.out.println("on ne l'a pas");
             // on initialise le place picker avec une position par défault à CPE
             LatLng southwest = new LatLng(45.784606, 4.769657);
             LatLng northeast = new LatLng(45.784606, 4.969657);
-            LatLngBounds bounds = new LatLngBounds(southwest, northeast);
-            builder.setLatLngBounds(bounds);
+            bounds = new LatLngBounds(southwest, northeast);
+            updateLocalisation(bounds);
         }
 
 
+
+
+    }
+
+    private void updateLocalisation(LatLngBounds bounds){
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        builder.setLatLngBounds(bounds);
         try{
             Intent intent = builder.build(activity);
             startActivityForResult(intent, PLACE_PICKER_REQUEST);
@@ -92,7 +106,6 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
         }catch(GooglePlayServicesNotAvailableException e){
             System.out.println("GooglePlayServicesNotAvailableException");
         }
-
     }
 
 
@@ -110,6 +123,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
             journey.setPlaceId(place.getId());
             mainActivity.setPickedPlaceId(place.getId());
             // Update UI with bounds
+            mainActivity.goBackLevelHomePage();
 
         }
     }
@@ -121,8 +135,6 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
         LatLng paris = new LatLng(48.9034,2.5053);
         googleMap.addMarker(new MarkerOptions().position(paris)
              .title("Marker in Sydney"));
-
-
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(paris));
     }
 
@@ -135,25 +147,53 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public Place getPlace(String IdByGoogleApi){
-        GoogleApiClient gclient = new GoogleApiClient.Builder(activity).addApi(Places.PLACE_DETECTION_API).addApi(Places.GEO_DATA_API).build();
-        Places.GeoDataApi.getPlaceById( gclient, IdByGoogleApi).setResultCallback(new ResultCallback<PlaceBuffer>() {
+        PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById( gclient, IdByGoogleApi);
+        placeResult.setResultCallback(new ResultCallback<PlaceBuffer>() {
             @Override
             public void onResult(@NonNull PlaceBuffer places) {
+                if (!places.getStatus().isSuccess()) {
+                    // Request did not complete successfully
+                    Log.e(TAG, "Place query did not complete. Error: " + places.getStatus().toString());
+                    places.release();
+                    return;
+                }
+                // Get the Place object from the buffer.
+                final Place place = places.get(0);
                 if (places.getStatus().isSuccess() && places.getCount() > 0) {
                     myPlace = places.get(0);
-                    Log.i(TAG, "Place found: " + myPlace.getName());
+                    System.out.println( "Place found: " + myPlace.getName());
+                    updateLocalisation(new LatLngBounds(myPlace.getLatLng(),myPlace.getLatLng()));
                 } else {
-                    Log.e(TAG, "Place not found");
+                    System.out.println( "Place not found");
                 }
+                // on libere le buffer
                 places.release();
             }
         });
+        // pour debug
+        if(myPlace!=null) {
+            System.out.println("Place found: outside " + myPlace.getName());
+        }else{
+            System.out.println("place is null :-( ");
+        }
         return myPlace;
     }
 
 
     public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        gclient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        gclient.disconnect();
     }
 
 }

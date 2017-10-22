@@ -91,12 +91,12 @@ public class JourneyViewModel extends BaseObservable {
             DatabaseInstance.getInstance(mainActivity).updateJourney(getId(), name, departure_date, return_date, mainActivity.getPickedPlaceId(), note);
         }
         activity.setTitle(R.string.app_name);
-        mainActivity.homePage();
+        mainActivity.goBackLevelHomePage();
     }
 
     public void returnToMainActivity() {
         activity.setTitle(R.string.app_name);
-        mainActivity.homePage();
+        mainActivity.goBackLevelHomePage();
     }
 
     public void setReturnDate() {
