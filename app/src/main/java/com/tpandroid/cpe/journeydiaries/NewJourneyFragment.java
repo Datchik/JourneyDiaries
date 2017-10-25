@@ -1,5 +1,6 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -30,11 +31,20 @@ public class NewJourneyFragment extends Fragment{
         }
         NewJourneyFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.new_journey_fragment,container,false);
         mainActivity = (MainActivity)activity;
-        binding.setJvm(new JourneyViewModel(journey, activity, mainActivity));
+        JourneyViewModel jvm = new JourneyViewModel(journey, activity, mainActivity);
+        binding.setJvm(jvm);
         return binding.getRoot();
     }
 
     @Override
+    @TargetApi(11)
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+    }
+
+    @Override
+    @TargetApi(23)
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;

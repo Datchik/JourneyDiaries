@@ -1,5 +1,6 @@
 package com.tpandroid.cpe.journeydiaries;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -54,9 +56,17 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 // https://stackoverflow.com/questions/20198750/android-mapfragment-within-a-fragment
 
     @Override
+    @TargetApi(11)
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+    }
+
+    @Override
+    @TargetApi(23)
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.activity = (Activity)context;
+        activity = (Activity) context;
     }
 
     @Override
@@ -103,6 +113,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
             startActivityForResult(intent, PLACE_PICKER_REQUEST);
         }catch(GooglePlayServicesRepairableException e) {
             System.out.println("GooglePlayServicesRepairableException");
+            Toast.makeText(activity,"Votre version de Google Play Services n'est pas supportée",Toast.LENGTH_LONG).show();
         }catch(GooglePlayServicesNotAvailableException e){
             System.out.println("GooglePlayServicesNotAvailableException");
         }

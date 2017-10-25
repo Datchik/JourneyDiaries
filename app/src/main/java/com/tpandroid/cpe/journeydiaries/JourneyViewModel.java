@@ -94,6 +94,10 @@ public class JourneyViewModel extends BaseObservable {
         mainActivity.goBackLevelHomePage();
     }
 
+    public void seeOnMapClick(){
+        mainActivity.viewMap();
+    }
+
     public void returnToMainActivity() {
         activity.setTitle(R.string.app_name);
         mainActivity.goBackLevelHomePage();

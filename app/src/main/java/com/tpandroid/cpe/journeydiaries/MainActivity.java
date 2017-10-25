@@ -2,10 +2,12 @@ package com.tpandroid.cpe.journeydiaries;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.tpandroid.cpe.journeydiaries.databinding.MainActivityBinding;
@@ -54,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
     public void goBackLevelHomePage(){
         FragmentManager manager = getFragmentManager();
         manager.popBackStack();
+        manager.getBackStackEntryCount();
+    }
+
+    public void goHomePage(){
+        FragmentManager manager = getFragmentManager();
+        manager.popBackStack(manager.getBackStackEntryCount(),manager.POP_BACK_STACK_INCLUSIVE);
     }
 
     public void newJourney() {
@@ -81,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
         MyMapFragment fragment = new MyMapFragment();
         fragment.setMainActivity(this);
         fragment.setJourney(journey);
+        transaction.add(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void viewMap(){
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        AllJourneyMapFragment fragment = new AllJourneyMapFragment();
         transaction.add(R.id.fragment_container,fragment);
         transaction.addToBackStack(null);
         transaction.commit();

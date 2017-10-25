@@ -1,25 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="jvm"
             type="com.tpandroid.cpe.journeydiaries.JourneyViewModel"
             />
     </data>
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/journeys_list"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/menubar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_weight=".50"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> jvm.returnToMainActivity()}"
+                android:text="@string/journeys_list" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_weight=".50"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> jvm.seeOnMapClick()}"
+                android:text="@string/view_on_maps" />
+        </LinearLayout>
+
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_journey_button"
-            android:layout_gravity="bottom|end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> jvm.newJourneyClick()}"
-            />
-    </android.support.design.widget.CoordinatorLayout>
+            android:layout_below="@+id/menubar">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/journeys_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_journey_button"
+                android:layout_gravity="bottom|end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> jvm.newJourneyClick()}"
+                />
+        </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
 </layout>
