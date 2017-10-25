@@ -100,7 +100,7 @@ public class JourneyViewModel extends BaseObservable {
 
     public void returnToMainActivity() {
         activity.setTitle(R.string.app_name);
-        mainActivity.goBackLevelHomePage();
+        mainActivity.goHomePage();
     }
 
     public void setReturnDate() {

@@ -24,8 +24,9 @@
                 android:layout_width="0dp"
                 android:layout_weight=".50"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> jvm.returnToMainActivity()}"
-                android:text="@string/journeys_list" />
+                android:text="@string/journeys_list"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:background="@color/place_autocomplete_search_hint"/>
 
             <Button
                 android:id="@+id/button2"

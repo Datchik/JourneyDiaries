@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="jvm"
+            type="com.tpandroid.cpe.journeydiaries.JourneyViewModel"
+            />
+    </data>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="com.tpandroid.cpe.journeydiaries.AllJourneyMapFragment">
+        <LinearLayout
+            android:id="@+id/menubar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/button_goback"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:text="@string/journeys_list"
+                 />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_weight=".50"
+                android:layout_height="wrap_content"
+                android:text="@string/view_on_maps"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:background="@color/place_autocomplete_search_hint"/>
+        </LinearLayout>
         <com.google.android.gms.maps.MapView
             android:id="@+id/map_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
- </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/menubar"/>
+        </RelativeLayout>
+</layout>

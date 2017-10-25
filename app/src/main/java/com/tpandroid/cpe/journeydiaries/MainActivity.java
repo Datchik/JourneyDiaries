@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     public void goBackLevelHomePage(){
         FragmentManager manager = getFragmentManager();
         manager.popBackStack();
-        manager.getBackStackEntryCount();
     }
 
     public void goHomePage(){

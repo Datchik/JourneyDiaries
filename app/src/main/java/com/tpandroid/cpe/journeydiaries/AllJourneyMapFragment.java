@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -83,6 +84,8 @@ public class AllJourneyMapFragment extends Fragment {
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.journeys_fragment,container,false);
         journeys = DatabaseInstance.getInstance(binding.getRoot().getContext()).getAllJourneys();
 
+
+
         for(Journey j : journeys){
             if(j.getPlaceId()!=null ) {
                 // On lance la recherche de l'endroit pour remplir notre tableau
@@ -91,6 +94,16 @@ public class AllJourneyMapFragment extends Fragment {
         }
 
         View view = inflater.inflate(R.layout.fragment_journeys_map, container, false);
+        Button button = (Button) view.findViewById(R.id.button_goback);
+        // Listener "à la main", pour revenir sur l'écran principal
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                getFragmentManager().popBackStack();
+            }
+        });
         mapView = (MapView) view.findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         return view;

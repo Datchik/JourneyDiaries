@@ -49,6 +49,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
     private MainActivity mainActivity;
     private Place myPlace;
     private GoogleApiClient gclient;
+    private Button goBack;
 
     private static final int PLACE_PICKER_REQUEST = 1;
 
@@ -75,15 +76,7 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 
         gclient = new GoogleApiClient.Builder(mainActivity).addApi(Places.GEO_DATA_API).build();
 
-        // on utilise maps -> pas de fragment
-        // activity.setContentView(R.layout.mymap_fragment);
-
-
-
-
-
-
-        System.out.println("FINDME "+journey.getPlaceId());
+        //System.out.println("FINDME "+journey.getPlaceId());
 
         LatLngBounds bounds;
         if(journey.getPlaceId()!=null ) {
@@ -104,6 +97,8 @@ public class MyMapFragment extends Fragment implements OnMapReadyCallback {
 
 
     }
+
+
 
     private void updateLocalisation(LatLngBounds bounds){
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
